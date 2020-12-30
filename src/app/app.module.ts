@@ -9,6 +9,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
+import { BoardsGridComponent } from './boards-grid/boards-grid.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { MainComponent } from './main/main.component';
     HeaderComponent,
     LoginComponent,
     MainComponent,
+    BoardsGridComponent,
   ],
   imports: [
     BrowserModule,

@@ -25,6 +25,10 @@
                 {{ item }}
               </div>
             </div>
+            <div *ngIf="isAddCardInputVisible">
+              <input class="input is-primary" type="text" style="margin-bottom: 5px;">
+            </div>
+            <button class="button is-primary" (click)="openAddTaskInput()">+ Add a card</button>
           </div>
   
         </div>

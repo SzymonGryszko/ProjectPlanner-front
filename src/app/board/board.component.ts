@@ -11,6 +11,8 @@ import { Column } from '../models/column.model';
 })
 export class BoardComponent implements OnInit {
 
+  isAddCardInputVisible: boolean = false;
+
   constructor() { }
 
   board: Board = new Board('Test Board', [
@@ -52,6 +54,11 @@ export class BoardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
+  }
+
+  openAddTaskInput() {
+    this.isAddCardInputVisible = !this.isAddCardInputVisible;
+    console.log(this.isAddCardInputVisible);
   }
 
 }
