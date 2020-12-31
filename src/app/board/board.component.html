@@ -11,25 +11,18 @@
       <div class="board-wrapper">
   
         <div class="board-columns" cdkDropListGroup>
-          <div class="board-column" *ngFor="let column of board.columns">
-  
-            <div class="column-title">
-              {{ column.name }}
-            </div>
-  
-            <div class="tasks-container"
+          <div *ngFor="let column of board.columns">
+
+            <!-- <div class="tasks-container"
             cdkDropList
             [cdkDropListData]="column.tasks"
             (cdkDropListDropped)="drop($event)">
               <div class="task" *ngFor="let item of column.tasks" cdkDrag>
                 {{ item }}
               </div>
-            </div>
-            <div *ngIf="isAddCardInputVisible">
-              <input class="input is-primary" type="text" style="margin-bottom: 5px;">
-            </div>
-            <button class="button is-primary" (click)="openAddTaskInput()">+ Add a card</button>
-          </div>
+            </div> -->
+
+            <app-column [tasks]="column.tasks"></app-column>
   
         </div>
   

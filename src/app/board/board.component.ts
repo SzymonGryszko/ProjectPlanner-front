@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Board } from '../models/board.model';
 import { Card } from '../models/card.model';
 import { Column } from '../models/column.model';
+import { ColumnComponent } from '../column/column.component';
 
 @Component({
   selector: 'app-board',
@@ -11,7 +12,8 @@ import { Column } from '../models/column.model';
 })
 export class BoardComponent implements OnInit {
 
-  isAddCardInputVisible: boolean = false;
+
+  @ViewChild('col')(ColumnComponent) col:ColumnComponent;
 
   constructor() { }
 
@@ -45,20 +47,16 @@ export class BoardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
-    }
-  }
+  // drop(event: CdkDragDrop<string[]>) {
+  //   if (event.previousContainer === event.container) {
+  //     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  //   } else {
+  //     transferArrayItem(event.previousContainer.data,
+  //       event.container.data,
+  //       event.previousIndex,
+  //       event.currentIndex);
+  //   }
+  // }
 
-  openAddTaskInput() {
-    this.isAddCardInputVisible = !this.isAddCardInputVisible;
-    console.log(this.isAddCardInputVisible);
-  }
 
 }

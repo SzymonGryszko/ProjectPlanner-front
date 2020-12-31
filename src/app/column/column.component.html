@@ -1,0 +1,17 @@
+<div class="board-column">
+
+    <h1 class="column-title">Title</h1>
+
+    <div class="tasks-container" cdkDropList [cdkDropListData]="tasks" (cdkDropListDropped)="drop($event)">
+        <div class="task" *ngFor="let task of tasks" cdkDrag>
+                    {{ task }}
+        </div>
+    </div>
+    
+    <div *ngIf="isAddCardInputVisible">
+        <input class="input is-primary" type="text" style="margin-bottom: 5px; margin-top: 20px;">
+    </div>
+    <button class="button is-primary" (click)="openAddTaskInput()">+ Add a card</button>
+</div>
+
+

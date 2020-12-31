@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { BoardsGridComponent } from './boards-grid/boards-grid.component';
+import { ColumnComponent } from './column/column.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { BoardsGridComponent } from './boards-grid/boards-grid.component';
     LoginComponent,
     MainComponent,
     BoardsGridComponent,
+    ColumnComponent,
   ],
   imports: [
     BrowserModule,
