@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Board } from '../models/board.model';
-import { Card } from '../models/card.model';
 import { Column } from '../models/column.model';
 import { ColumnComponent } from '../column/column.component';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-board',
@@ -12,8 +11,9 @@ import { ColumnComponent } from '../column/column.component';
 })
 export class BoardComponent implements OnInit {
 
-
   @ViewChild('col')(ColumnComponent) col:ColumnComponent;
+  value = Board.name;
+  control = new FormControl(this.value);
 
   constructor() { }
 
@@ -47,16 +47,13 @@ export class BoardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // drop(event: CdkDragDrop<string[]>) {
-  //   if (event.previousContainer === event.container) {
-  //     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-  //   } else {
-  //     transferArrayItem(event.previousContainer.data,
-  //       event.container.data,
-  //       event.previousIndex,
-  //       event.currentIndex);
-  //   }
-  // }
+  update() {
+    this.value = this.control.value;
+  }
+
+  cancel() {
+    this.control.setValue(this.value);
+  }
 
 
 }

@@ -3,7 +3,16 @@
     <div class="board">
   
       <div class="board-bar">
-        <p class="board-name">{{ board.name }}</p>
+
+        <editable class="board-name" (save)="update()" (cancel)="cancel()">
+          <ng-template viewMode>{{ value }}</ng-template>
+    
+          <ng-template editMode>
+            <input class="board-name" editableOnEnter editableOnEscape [formControl]="control" />
+          </ng-template>
+        </editable>
+
+        
         <button class="button is-small is-primary is-outlined button-has-margin-right">Add Column</button>
         <button class="button is-small is-primary is-outlined button-has-margin-right">Add Members</button>
       </div>
@@ -13,18 +22,9 @@
         <div class="board-columns" cdkDropListGroup>
           <div *ngFor="let column of board.columns">
 
-            <!-- <div class="tasks-container"
-            cdkDropList
-            [cdkDropListData]="column.tasks"
-            (cdkDropListDropped)="drop($event)">
-              <div class="task" *ngFor="let item of column.tasks" cdkDrag>
-                {{ item }}
-              </div>
-            </div> -->
-
             <app-column [tasks]="column.tasks"></app-column>
   
-        </div>
+          </div>
   
       </div>
   

@@ -11,6 +11,10 @@ import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { BoardsGridComponent } from './boards-grid/boards-grid.component';
 import { ColumnComponent } from './column/column.component';
+import { FormsModule } from '@angular/forms';
+import { EditableModule } from '@ngneat/edit-in-place';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +30,10 @@ import { ColumnComponent } from './column/column.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    DragDropModule 
+    DragDropModule,
+    FormsModule,
+    EditableModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

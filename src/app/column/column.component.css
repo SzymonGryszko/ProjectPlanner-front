@@ -22,6 +22,12 @@
     text-transform: uppercase;
     margin-bottom: 20px;
 }
+.column-title-edit {
+    font-size: 20px;
+    font-weight: 800;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+}
 
 .tasks-container {
     flex-grow: 1;
