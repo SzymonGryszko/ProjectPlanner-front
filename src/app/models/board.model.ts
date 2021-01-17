@@ -1,5 +1,10 @@
 import { Column } from './column.model';
+import { User } from './user.model';
 
 export class Board {
-    constructor(public name: string, public columns: Column[]) {}
+    boardId: number;
+    title: string;
+    columns: Column[];
+    owner: User;
+    boardMembers: User[];
 }

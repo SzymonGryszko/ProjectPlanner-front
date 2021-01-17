@@ -1,3 +1,7 @@
+import { Task } from "./card.model";
+
 export class Column {
-    constructor(public name: string, public tasks: string[]) {}
+    title: string;
+    tasks: Task[];
+    colId: number;
 }
