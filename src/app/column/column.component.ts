@@ -1,6 +1,8 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Task } from '../models/card.model';
+import { Column } from '../models/column.model';
 
 @Component({
   selector: 'app-column',
@@ -9,26 +11,31 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ColumnComponent implements OnInit {
 
-  @Input() tasks:string[];
-  isAddCardInputVisible: boolean = false;
-  value = 'Title'
-  control = new FormControl(this.value);
+  @Input() column:Column;
+  colTitle = ''
+  control = new FormControl(this.colTitle);
+  tasks:Task[];
+  columnId: number;
+  isAddTaskInputVisible: boolean = false;
   formGroup: FormGroup;
-  newCardTitle:string = '';
-  addNewCardFormGroup: FormGroup;
-  newCardTitleControl: string;
+  newTaskTitle:string = '';
+  addNewTaskFormGroup: FormGroup;
+  newTaskTitleControl: string;
 
   constructor() {
 
    }
 
   ngOnInit(): void {
-    this.addNewCardFormGroup = new FormGroup({
-      newCardTitleControl : new FormControl('')
+    this.addNewTaskFormGroup = new FormGroup({
+      newTaskTitleControl : new FormControl('')
     });
+    this.colTitle = this.column.title;
+    this.tasks = this.column.tasks;
+    this.columnId = this.column.colId;
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       console.log(event.previousContainer === event.container)
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -41,22 +48,32 @@ export class ColumnComponent implements OnInit {
 }
 
 openAddTaskInput() {
-  this.isAddCardInputVisible = !this.isAddCardInputVisible;
-  console.log(this.isAddCardInputVisible);
+  this.isAddTaskInputVisible = !this.isAddTaskInputVisible;
+  console.log(this.isAddTaskInputVisible);
 }
 
 update() {
-  this.value = this.control.value;
+  if(this.control.value.trim().length !== 0) {
+    console.log(this.control.value)
+    this.colTitle = this.control.value;
+  }
+  
 }
 
 cancel() {
-  this.control.setValue(this.value);
+  this.control.setValue(this.colTitle);
 }
 
-onNewCardInputEnter(){
-  this.tasks.push(this.addNewCardFormGroup.get('newCardTitleControl').value);
-  this.isAddCardInputVisible = false;
-  this.addNewCardFormGroup.reset();
+onNewTaskInputEnter(){
+  const taskTitle: string = this.addNewTaskFormGroup.get('newTaskTitleControl').value;
+  if (taskTitle.trim().length > 0) {
+    let task =  new Task();
+    task.title = taskTitle;
+    this.tasks.push(task);
+    this.isAddTaskInputVisible = false;
+    this.addNewTaskFormGroup.reset();
+  }
+
   
 }
 

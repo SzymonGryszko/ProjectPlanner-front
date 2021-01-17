@@ -4,7 +4,7 @@
   
       <div class="board-bar">
 
-        <editable class="board-name" (save)="update()" (cancel)="cancel()">
+        <editable class="board-name" (save)="updateBoardTitle()" (cancel)="cancelUpdateBoardTitle()">
           <ng-template viewMode>{{ value }}</ng-template>
     
           <ng-template editMode>
@@ -22,7 +22,7 @@
         <div class="board-columns" cdkDropListGroup>
           <div *ngFor="let column of board.columns">
 
-            <app-column [tasks]="column.tasks"></app-column>
+            <app-column [column]="column"></app-column>
   
           </div>
   

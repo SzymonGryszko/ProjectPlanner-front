@@ -15,7 +15,7 @@ import { throwError } from 'rxjs';
 export class BoardComponent implements OnInit {
 
   @ViewChild('col')(ColumnComponent) col:ColumnComponent;
-  value = Board.name;
+  value = '';
   control = new FormControl(this.value);
 
   constructor(private boardsService: BoardsService, private activatedRoute: ActivatedRoute) { }
@@ -27,16 +27,19 @@ export class BoardComponent implements OnInit {
     this.boardId = this.activatedRoute.snapshot.params.id;
     this.boardsService.getBoardById(this.boardId).subscribe(data => {
       this.board = data;
+      this.value = this.board.title;
     }, error => {
       throwError(error);
     });
   }
 
-  update() {
-    this.value = this.control.value;
+  updateBoardTitle() {
+    if(this.control.value.trim().length !== 0) {
+      this.value = this.control.value;
+    }
   }
 
-  cancel() {
+  cancelUpdateBoardTitle() {
     this.control.setValue(this.value);
   }
 

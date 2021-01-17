@@ -1,7 +1,7 @@
 <div class="board-column">
 
     <editable class="column-title" (save)="update()" (cancel)="cancel()">
-        <ng-template viewMode>{{ value }}</ng-template>
+        <ng-template viewMode>{{ colTitle }}</ng-template>
   
         <ng-template  editMode>
           <input class="column-title-edit" editableOnEnter editableOnEscape [formControl]="control" />
@@ -10,13 +10,13 @@
 
     <div class="tasks-container" cdkDropList [cdkDropListData]="tasks" (cdkDropListDropped)="drop($event)">
         <div class="task" *ngFor="let task of tasks" cdkDrag>
-                    {{ task }}
+                    {{ task.title }}
         </div>
     </div>
     
-    <div *ngIf="isAddCardInputVisible">
-        <form [formGroup]="addNewCardFormGroup" >
-            <input class="input is-primary" (keyup.enter)="onNewCardInputEnter()"  [formControlName]="'newCardTitleControl'" type="text" id="newCardTitleControl" placeholder="Press enter to save" style="margin-bottom: 5px; margin-top: 20px;">
+    <div *ngIf="isAddTaskInputVisible">
+        <form [formGroup]="addNewTaskFormGroup" >
+            <input class="input is-primary" (keyup.enter)="onNewTaskInputEnter()"  [formControlName]="'newTaskTitleControl'" type="text" id="newTaskTitleControl" placeholder="Press enter to save" style="margin-bottom: 5px; margin-top: 20px;">
         </form>
     </div>
     <button class="button is-primary" (click)="openAddTaskInput()">+ Add a card</button>
