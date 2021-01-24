@@ -13,14 +13,14 @@
         </editable>
 
         
-        <button class="button is-small is-primary is-outlined button-has-margin-right">Add Column</button>
+        <button class="button is-small is-primary is-outlined button-has-margin-right" (click)="addNewColumn()">Add Column</button>
         <button class="button is-small is-primary is-outlined button-has-margin-right">Add Members</button>
       </div>
   
       <div class="board-wrapper">
   
         <div class="board-columns" cdkDropListGroup>
-          <div *ngFor="let column of board.columns">
+          <div *ngFor="let column of columns">
 
             <app-column [column]="column"></app-column>
   

@@ -1,8 +1,10 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { throwError } from 'rxjs';
 import { Task } from '../models/card.model';
 import { Column } from '../models/column.model';
+import { ColumnService } from '../Service/column.service';
 
 @Component({
   selector: 'app-column',
@@ -22,7 +24,7 @@ export class ColumnComponent implements OnInit {
   addNewTaskFormGroup: FormGroup;
   newTaskTitleControl: string;
 
-  constructor() {
+  constructor(private columnService: ColumnService) {
 
    }
 
@@ -69,7 +71,11 @@ onNewTaskInputEnter(){
   if (taskTitle.trim().length > 0) {
     let task =  new Task();
     task.title = taskTitle;
-    this.tasks.push(task);
+    this.columnService.saveNewTask(taskTitle, this.columnId).subscribe(data => {
+      this.tasks = data;
+    }, error => {
+      throwError(error);
+    });
     this.isAddTaskInputVisible = false;
     this.addNewTaskFormGroup.reset();
   }
