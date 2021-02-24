@@ -22,4 +22,9 @@ export class ColumnService {
     return this.httpClient.post<Task[]>(this.baseUrl + 'api/column/' + columnId + '/add-task', taskTitle);
   }
 
+  updateTasksListAfterDragDrop(columnId: number, tasks: Task[]) : Observable<Task[]> {
+    console.log('method invoked')
+    return this.httpClient.post<Task[]>(this.baseUrl + 'api/column/' + columnId + '/update-set', tasks);
+  }
+
 }

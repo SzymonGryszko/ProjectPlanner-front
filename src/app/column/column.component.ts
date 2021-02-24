@@ -1,5 +1,5 @@
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, Input, OnInit } from '@angular/core';
+import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Component, Input, IterableDiffers, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { throwError } from 'rxjs';
 import { Task } from '../models/card.model';
@@ -23,10 +23,22 @@ export class ColumnComponent implements OnInit {
   newTaskTitle:string = '';
   addNewTaskFormGroup: FormGroup;
   newTaskTitleControl: string;
+  iterableDiffer: any;
 
-  constructor(private columnService: ColumnService) {
+  constructor(private columnService: ColumnService,private iterableDiffers: IterableDiffers) {
+    this.iterableDiffer = iterableDiffers.find([]).create(null);
+}
 
-   }
+ngDoCheck() {
+  let changes = this.iterableDiffer.diff(this.tasks);
+  if (changes) {
+      console.log('Changes detected!');
+      this.columnService.updateTasksListAfterDragDrop(this.columnId, this.tasks).subscribe(data => {
+        console.log('date returned');
+      });
+  }
+}
+  
 
   ngOnInit(): void {
     this.addNewTaskFormGroup = new FormGroup({
@@ -39,7 +51,6 @@ export class ColumnComponent implements OnInit {
 
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
-      console.log(event.previousContainer === event.container)
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
         transferArrayItem(event.previousContainer.data,
